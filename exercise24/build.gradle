@@ -24,5 +24,5 @@ run{
 }
 
 application{
-mainClassName ="exercise24.Solution24"
+mainClassName ="baseline.Solution24"
 }
