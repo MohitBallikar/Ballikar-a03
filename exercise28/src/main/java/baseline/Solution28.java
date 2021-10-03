@@ -3,27 +3,45 @@
  *  Copyright 2021 Mohit Ballikar
  */
 package baseline;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 public class Solution28 {
 
-    public static void main(String[] args) {
+    //calls the loop function which does all the heavy-lifting
+    public static void main(String[] args) throws IOException {
         loopfunct();
     }
 
-    public static int loopfunct(){
+    public static int loopfunct() throws IOException {
+        //initialize the variable values
+        int sumofallnumbers = 0;
+        String inputstring = "";
 
-        int sum =0;
-        return sum;
+        //Define inputs
+        BufferedReader readInput = new BufferedReader(new InputStreamReader(System.in));
+        //ensure that illegitimate values will not be accepted
+        while (true) {
+            try {
+            for (int i = 0; i < 5; i++) {
+                //loop for storing and adding values for the final sum
+                System.out.print("Enter a number: ");
+                inputstring = readInput.readLine();
+
+                    sumofallnumbers += Integer.parseInt(inputstring);
+
+
+            }
+            } catch (NumberFormatException e) {
+                System.out.print("Sorry. That's not a valid input.\n");
+            }
+            //print out the final sum
+            System.out.printf("The total is %d.", sumofallnumbers);
+
+            return sumofallnumbers;
+        }
 
     }
-
 }
 
-/*
-Write a program that prompts the user for five numbers and computes the total of the numbers.
-    Within a loop:
-        Prompt user input
-        Store user input
-        Add user input for calculation
-   The above section can be done within a function that will be called from the main
- */
+
