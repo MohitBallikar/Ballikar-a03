@@ -10,6 +10,7 @@ class Solution27Test {
 
         int expected = 0;
         int actual = app.checkfirstname("John");
+        assertEquals(expected, actual);
 
     }
 
@@ -19,6 +20,7 @@ class Solution27Test {
 
         int expected = 0;
         int actual = app.checklastname("Gomez");
+        assertEquals(expected, actual);
 
     }
 
@@ -28,6 +30,7 @@ class Solution27Test {
 
         int expected = 1;
         int actual = app.checklastname("G");
+        assertEquals(expected, actual);
 
     }
 
@@ -36,7 +39,8 @@ class Solution27Test {
         Solution27 app = new Solution27();
 
         int expected = 2;
-        int actual = app.checklastname(" ");
+        int actual = app.checklastname("");
+        assertEquals(expected, actual);
 
     }
 
@@ -46,6 +50,7 @@ class Solution27Test {
 
         int expected = 0;
         int actual = app.checkzipcode("66666");
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -54,5 +59,6 @@ class Solution27Test {
 
         int expected = 0;
         int actual = app.checkemployeeID("XY-3567");
+        assertEquals(expected, actual);
     }
 }
