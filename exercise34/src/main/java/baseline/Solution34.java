@@ -3,21 +3,72 @@
  *  Copyright 2021 Mohit Ballikar
  */
 package baseline;
-
+import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 public class Solution34
 {
-    public static void main(String[] args) {
-
+    public static void main(String[] args)  throws IOException
+    {
+        //Remove an Employee from this list.
         removeemployee();
-        displayemployees();
     }
 
-    public static void removeemployee(){
+    static void removeemployee() throws IOException
+    {
+        String inputstring = "";
+        int noofemployees = 5;
+        boolean employeeremoved = false;
+
+        // Declaring the ArrayList for the Employees
+        ArrayList<String> employeelist  = new ArrayList<String>(noofemployees);
+        employeelist.add("John Smith");
+        employeelist.add("Jackie Jackson");
+        employeelist.add("Chris Jones");
+        employeelist.add("Amanda Cullen");
+        employeelist.add("Jeremy Goodwin");
+
+        //Display current Employees
+        displayemployees(employeelist);
+
+        //Define the standard library for inputs
+        BufferedReader readInput = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("\nEnter an employee name to remove: ");
+        inputstring = readInput.readLine();
+
+        //Check for all Employee names.
+        for (int i = 0; i < employeelist.size(); i++)
+        {
+            //Check if that employee is there in the list.
+            if (employeelist.get(i).equals(inputstring))
+            {
+                //Remove the Employee
+                employeelist.remove(inputstring);
+                employeeremoved = true;
+            }
+        }
+
+        //if the employee is not found then print out error message.
+        if (!employeeremoved)
+        {
+            System.out.println("Employee '"+inputstring+"' not found.\n");
+        }
+
+        //Display the new employee list.
+        displayemployees(employeelist);
 
     }
 
-    public static void displayemployees(){
-
+    //Method to display employees.
+    static void displayemployees(ArrayList<String> employeelist)
+    {
+        System.out.println("There are "+employeelist.size()+" employees:");
+        for (int i = 0; i < employeelist.size(); i++)
+        {
+            // Printing Employee names
+            System.out.print(employeelist.get(i) + "\n");
+        }
     }
 }
 
