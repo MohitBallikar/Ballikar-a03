@@ -6,16 +6,36 @@ package baseline;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Solution33 {
-    public static void main(String[] args) throws IOException{
-
+    //calls the function
+    public static void main(String[] args) throws IOException {
         playmagicball();
     }
+    //predefine strings
+    static void playmagicball() throws IOException {
+        String inputstring = "";
+        String magicballresponse = "";
 
-    static void playmagicball() throws IOException{
-        
+        //Store the possible choices in a list and select one at random.
+        ArrayList<String> magicball = new ArrayList<String>(4);
+        magicball.add("Yes.");
+        magicball.add("No.");
+        magicball.add("Maybe.");
+        magicball.add("Ask again later.");
+
+        //Read the user input.
+        BufferedReader readInput = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("What's your question? ");
+        inputstring = readInput.readLine();
+
+        //Generate Random number which will be used to select an answer
+        int index = (int) (Math.random() * magicball.size());
+        magicballresponse = magicball.get(index);
+        System.out.println(magicballresponse + "\n");
+
     }
 }
 
