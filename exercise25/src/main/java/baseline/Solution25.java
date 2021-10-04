@@ -4,93 +4,113 @@
  */
 package baseline;
 
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 
 public class Solution25 {
 
-    /*
-    prompt for user input
-    passwordValidator must be used for the comparison of the password to the requirements
-    maybe use a string comparison function or an array of character(s) function for the actual processing
-    ensure that a single output statement is used (could be a separate function)
-        output is varied between: very weak, weak, strong, very strong, and unknown
-    generate test cases for the efficacy of each of the above labels/descriptions
+    public static void main(String[] args) throws IOException
+    {
+        //initialize variables and strings
+        int returnpassword =0;
+        String inputpassword;
 
-     */
+        //Define the standard library for inputs
+        BufferedReader readInput = new BufferedReader(new InputStreamReader(System.in));
 
-    public static int passwordValidator(String password) {
+        //Prompt for user input
+        System.out.print("Please enter the password: ");
+        inputpassword = readInput.readLine();
+        returnpassword = passwordValidator(inputpassword);
 
-        int plen = password.length();
-        int pstr = 0;
+        //string builder for the single output statement
+        StringBuilder str = new StringBuilder("");
 
-        String regex = "^[a-zA-Z0-9]+$";
-        Pattern pattern = Pattern.compile(regex);
-
-
-        for (int i = 0; i < plen; i++) {
-
-            if ((pstr == 0) && (plen < 8) && (password.charAt(i) >= '!' && password.charAt(i) <= '/' || password.charAt(i) >= ':' && password.charAt(i) <= '@' || password.charAt(i) >= '[' && password.charAt(i) <= '\'' || password.charAt(i) >= '{' && password.charAt(i) <= '~')) {
-                pstr = 0;
-                return pstr;
-            }
-
-            if ((plen <= 7) && (password.charAt(i) >= '0') && (password.charAt(i) <= '9')) {
-                pstr = -2;
-                return pstr;
-            }
-
-            if ((plen <= 7) && (password.matches("[a-zA-Z]+"))) {
-                pstr = -1;
-                return pstr;
-            }
-
-            Matcher matcher = pattern.matcher(password);
-            pstr = 1;
-
-            if ((pstr == 1) && (plen >= 8)) {
-                pstr = 2;
-                return pstr;
-            }
-
-
-            if ((pstr == 1) && (((password.charAt(i) >= '!') && (password.charAt(i) <= '/')) || ((password.charAt(i) >= ':') && (password.charAt(i) <= '@')) || ((password.charAt(i) >= '[') && (password.charAt(i) <= '\'')) || ((password.charAt(i) >= '{') && (password.charAt(i) <= '~')))) {
-                pstr = 3;
-                return pstr;
-            }
-
-
-
-
-            return pstr;
-        }
-
-
-        public static void main(String[]args){
-            Scanner pwdscan = new Scanner(System.in);
-
-            System.out.print("Enter a password: ");
-
-            String password = pwdscan.nextLine();
-
-
-            int score = passwordValidator(password);
-
-            if (score == -2)
-                System.out.printf("The password \'%s\' is a very weak password. ", password);
-
-            if (score == -1)
-                System.out.printf("The password \'%s\' is a weak password. ", password);
-
-            if (score == 0)
-                System.out.printf("The password \'%s\' is of unknown strength. ", password);
-
-            if (score == 2)
-                System.out.printf("The password \'%s\' is a strong password. ", password);
-
-            if (score == 3)
-                System.out.printf("The password \'%s\' is a very strong password. ", password);
+        //unknown strength condition
+        if (returnpassword == 1 )
+        {
+            str.append("Password of unknown Strength");
         }
     }
-}
+
+    //function handling the strength of passwords outside of unkown
+    static int passwordValidator(String inputString) throws NumberFormatException
+    {
+        //same initialization
+        int returnvalue = 0;
+        int integerValue = 0;
+        int j =0;
+        StringBuilder str = new StringBuilder("");
+
+        //A very weak password contains only numbers and is fewer than eight characters.
+
+        //exceptions/conditionals used to define each type of password
+        try
+        {
+            integerValue = Integer.parseInt(inputString);
+            int integerlength = String.valueOf(integerValue).length();
+            if (integerlength < 8 )
+            {
+                str.append("The password '%s' is a very weak password.");
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            //regex used to limit the type of input accepted
+            //A weak password contains only letters and is fewer than eight characters.
+            boolean result = inputString.matches("[a-zA-Z]+");
+            if (result)
+            {
+                if (inputString.length() < 8)
+                {
+                    str.append("The password '%s' is a weak password.");
+                }
+            }
+            else
+            {
+                if (inputString.length() < 8)
+                {
+                    str.append("Password of unknown strength.");
+                }
+            }
+        }
+
+        //A strong password contains letters and at least one number and is at least eight characters.
+        //same situation used here
+        if (inputString.matches(".*\\d.*")){
+            //A very strong password contains letters, numbers, and special characters and is at least eight characters.
+
+            for (int intlength = 0; intlength < inputString.length(); intlength++)
+            {
+                // Checking the character for not being a letter,digit or space
+                if (!Character.isDigit(inputString.charAt(intlength))	&& !Character.isLetter(inputString.charAt(intlength)) && !Character.isWhitespace(inputString.charAt(intlength)))
+                {
+                    //Add one counter.
+                    j++;
+                }
+            }
+
+            if (j ==0 )
+            {
+                if (inputString.length() >= 8)
+                {
+                    str.append("The password '%s' is a strong password.");
+                }
+            }
+            else
+            {
+                if (inputString.length() >= 8)
+                {
+                    str.append("The password '%s' is a very strong password.");
+                }
+            }
+        }
+        //single output statement as needed
+        System.out.printf(String.valueOf(str), inputString);
+        return returnvalue;
+
+    }
+    }
+    

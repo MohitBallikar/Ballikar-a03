@@ -8,22 +8,10 @@ class Solution25Test {
 
     @Test
     void testVeryWeakPassword(){
-    assertEquals(-2,);
-    }
-
-    @Test
-    void testWeakPassword(){
-
-    }
-
-    @Test
-    void testStrongPassword(){
-
-    }
-
-    @Test
-    void testVeryStrongPassword(){
-
+        Solution25 app = new Solution25();
+        int expected = 0;
+        int actual = app.passwordValidator("abcdef");
+    assertEquals(expected,actual);
     }
 
 
