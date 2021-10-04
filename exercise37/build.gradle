@@ -23,5 +23,5 @@ run{
 }
 
 application{
-    mainClassName ="baseline.Solution36"
+    mainClassName ="baseline.Solution37"
 }
