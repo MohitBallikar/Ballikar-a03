@@ -4,28 +4,48 @@
  */
 package baseline;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 public class Solution35 {
-    public static void main(String[] args) {
-    pickawinner();
+    public static void main(String[] args) throws IOException {
+        //Pick a winner from a list randomly (calls the function)
+        pickawinner();
+
     }
 
+    static void pickawinner() throws IOException {
+        //initializes the strings/variables
+        String inputstring = "";
+        int noofusers = 10;
 
-    public static void pickawinner(){
+        // Declaring the ArrayList for the Employees
+        ArrayList<String> userlist = new ArrayList<String>(noofusers);
 
+        //Define the standard library for inputs
+        BufferedReader readInput = new BufferedReader(new InputStreamReader(System.in));
+
+        //Add Users to the list. Asks for user input as well
+        for (int i = 0; i < noofusers; i++) {
+            System.out.print("Enter a name: ");
+            inputstring = readInput.readLine();
+            if (inputstring.equals("")) {
+                break;
+            } else {
+                userlist.add(inputstring);
+            }
+        }
+
+        //Pick a random person for winner.
+        //System.out.println("userlist.size() "+ userlist.size());
+        int index = (int) (Math.random() * userlist.size());
+        //System.out.println("index = "+ index);
+
+        //Read the Indexed name (again decided by random).
+        System.out.println("The winner is ... " + userlist.get(index));
     }
 }
 
 
-/*
-Create a program that picks a winner for a contest or prize drawing.
-Prompt for names of contestants until the user leaves the entry blank.
-Then randomly select a winner.
-    Use a loop to capture user input into an array.
-    Use a random number generator to pluck a value from the array.
-    Don’t include a blank entry in the array.
-    Some languages require that you define the length of the array ahead of time. You may need to find another data structure, like an ArrayList.
-
- Pick random individual from an array list
- make sure all entries/indices are populated
- Have the function be called to select the winner with the above parameters
- */
