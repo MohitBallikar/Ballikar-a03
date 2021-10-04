@@ -23,4 +23,5 @@ Ensure that the heart rate and age are entered as numbers. Don’t allow the use
 Display the results in a tabular format.
     Formula = TargetHeartRate = (((220 − age) − restingHR) × intensity) + restingHR
 Needs to be formatted with the proper hyphens/underscores/pipes
+
  */
